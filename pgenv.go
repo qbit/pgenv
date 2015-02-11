@@ -1,5 +1,5 @@
-// Package pgenv provides the ability to get default postgres
-// credentials from the users env
+// Package pgenv provides a quick way to create db connection strings
+// from the running users environment variables.
 package pgenv
 
 import (
@@ -25,7 +25,7 @@ func getVar(envVal string, def string) string {
 	return ret
 }
 
-// SetDefaults sets a few common default variables based on os env
+// SetDefaults pulls common environment variables and sets them for later use.
 func (c ConnStr) SetDefaults() ConnStr {
 	c["user"] = getVar("PGUSER", "postgres")
 	c["dbname"] = getVar("PGDATABASE", "postgres")
@@ -37,7 +37,7 @@ func (c ConnStr) SetDefaults() ConnStr {
 	return c
 }
 
-// ToString returns a string that can be dropped into sql.Open
+// ToString converts the string map to a sql.Open() compatable connection string.
 func (c ConnStr) ToString() string {
 	var s []string
 	for key, val := range c {
