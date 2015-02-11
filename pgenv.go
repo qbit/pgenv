@@ -32,7 +32,7 @@ func (c ConnStr) SetDefaults() ConnStr {
 	c["host"] = getVar("PGHOST", "localhost")
 	c["port"] = getVar("PGPORT", "5432")
 	c["password"] = getVar("PGPASSWD", "")
-	c["sslmode"] = getVar("PGSSLMODE", "disabled")
+	c["sslmode"] = getVar("PGSSLMODE", "disable")
 
 	return c
 }
@@ -46,5 +46,5 @@ func (c ConnStr) ToString() string {
 		}
 	}
 
-	return strings.Join(s, ", ")
+	return strings.Join(s, " ")
 }
