@@ -27,8 +27,8 @@ func getVar(envVal string, def string) string {
 
 // SetDefaults pulls common environment variables and sets them for later use.
 func (c ConnStr) SetDefaults() ConnStr {
-	c["user"] = getVar("PGUSER", "postgres")
-	c["dbname"] = getVar("PGDATABASE", "postgres")
+	c["user"] = getVar("PGUSER", getVar("USER", "postgres"))
+	c["dbname"] = getVar("PGDATABASE", getVar("USER", "postgres"))
 	c["host"] = getVar("PGHOST", "localhost")
 	c["port"] = getVar("PGPORT", "5432")
 	c["password"] = getVar("PGPASSWD", "")
